@@ -26,6 +26,6 @@
         <a routerLink="login" *ngIf="!isAuth" class="hover:text-rose-600">
             Вход
         </a>
-        <button type="button" *ngIf="isAuth">Выход</button>
+        <button type="button" (click)="logOut()" *ngIf="isAuth">Выход</button>
     </div>
 </nav>

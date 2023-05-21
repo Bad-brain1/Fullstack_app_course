@@ -12,6 +12,8 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'
 import { AuthState } from './store/auth.state';
+import { CookieService } from 'ngx-cookie-service';
+import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,10 @@ import { AuthState } from './store/auth.state';
     FormsModule,
     NgxsModule.forRoot([AuthState]),
     NgxsLoggerPluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot()
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsResetPluginModule.forRoot(),
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

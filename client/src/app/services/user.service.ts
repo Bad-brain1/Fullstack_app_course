@@ -4,13 +4,16 @@ import { Config } from '../config/server';
 import { Store } from '@ngxs/store';
 import { UserAuthInterface } from './User.interface';
 import { AuthUpdate } from '../store/model/auth.model';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
+import { AuthState } from '../store/auth.state';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private store: Store) { }
+  constructor(private http: HttpClient, private store: Store, private router: Router,private cookieService:CookieService) { }
 
 
   register(body: object) {
@@ -20,7 +23,9 @@ export class UserService {
   login(body: object) {
     return this.http.post<UserAuthInterface>(`${Config.url}${Config.api}/auth/login`, body).subscribe({
       next:(data:UserAuthInterface)=>{
-        this.AuthStoreUpdate(data)
+        this.AuthStoreUpdate(data);
+        this.saveUserCookie();
+        this.router.navigateByUrl('/');
       }
     })
   }
@@ -37,6 +42,14 @@ export class UserService {
     }))
   }
 
+  saveUserCookie(){
+    let user = this.store.selectSnapshot(AuthState.getAuthObject)
+    this.cookieService.set('id',`${user.id}`);
+    this.cookieService.set('email',`${user.email}`);
+    this.cookieService.set('FN',`${user.userFirstName}`);
+    this.cookieService.set('SN',`${user.userSecondName}`);
+    this.cookieService.set('T',`${user.token}`);
+  }
   // TODO: сохранить пользователя в куки или локалстор
 
 }

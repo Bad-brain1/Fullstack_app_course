@@ -1,12 +1,13 @@
-<div class="w-full h-full">
+<div class="w-full h-full flex flex-col gap-6">
     <div class="text-center">
         <h1 class="font-bold text-3xl">Менеджер финансов</h1>
-    </div>
-    <div class="text-center">
-        <p class="font-medium text-lg text-gray-600">Войдите в аккаунт для просмотра ваших финансов</p>
+        <div class="text-center" *ngIf="!isAuth">
+            <p class="font-medium text-lg text-gray-600">Войдите в аккаунт для просмотра ваших финансов</p>
+        </div>
     </div>
     <div class="">
-        <ng-container *ngIf="true" [ngTemplateOutlet]="cap"></ng-container>
+        <ng-container *ngIf="!isAuth" [ngTemplateOutlet]="cap"></ng-container>
+        <ng-container *ngIf="isAuth" [ngTemplateOutlet]="finance"></ng-container>
     </div>
 </div>
 
@@ -21,4 +22,25 @@
 </ng-template>
 <ng-template #finance>
 
+    <div class="flex flex-col gap-4 items-center">
+        <div class="block w-96 p-6 bg-white border border-gray-200 rounded-lg shadow ">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-center">{{month}}</h5>
+            <p class="font-bold text-gray-700 text-center">*ЦИФРА*</p>
+        </div>
+
+        <div class="w-96 p-6 bg-white border border-gray-200 rounded-lg shadow flex gap-1">
+            <input type="text" id="pricy" name="pricy"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 h-10 p-2.5"
+                placeholder="Сумма" required>
+            <input type="text" id="text" name="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-10 p-2.5"
+                placeholder="Комментарий" required>
+            <button type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Добавить</button>
+        </div>
+        <div class="block w-96p-6 bg-white border border-gray-200 rounded-lg shadow" *ngFor="let f of financeUser">
+            <p class="font-normal text-gray-700">{{f.value}}</p>
+            <p class="font-normal text-gray-700">{{f.text}}</p>
+        </div>
+    </div>
 </ng-template>

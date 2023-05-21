@@ -19,7 +19,7 @@ class AuthController {
             if(!login){
                 res.status(409).json('Неверные данные');
             }
-            return res.status(200).json(login);
+            return res.status(200).json(login[0]);
         } catch (e) {
             res.status(500).json(e)
         }

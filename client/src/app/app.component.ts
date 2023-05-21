@@ -1,5 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthState } from './store/auth.state';
+import { AuthUpdate } from './store/model/auth.model';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +11,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  constructor(private store: Store, private cookieService: CookieService, private router: Router) { }
+// fix cookie
   ngOnInit(): void {
-    
+    this.router.events.subscribe(evt => {
+      if (evt instanceof NavigationEnd) {
+        if(this.cookieService.get('T').length > 0){
+          if (!this.store.selectSnapshot(AuthState.getIsAuth)) {
+            this.updateStore();
+          }
+          return true;
+        }
+      }
+      return true
+    });
+
+    if (!this.store.selectSnapshot(AuthState.getIsAuth)) {
+      this.updateStore();
+    }
   }
 
-  title = 'fullstack-client';
+  updateStore() {
+    return this.store.dispatch(
+      new AuthUpdate({
+        id: Number(this.cookieService.get('id')),
+        email: this.cookieService.get('email'),
+        userFirstName: this.cookieService.get('FN'),
+        userSecondName: this.cookieService.get('SN'),
+        token: this.cookieService.get('T'),
+        isAuth: true,
+      }))
+  }
+
+
 }
