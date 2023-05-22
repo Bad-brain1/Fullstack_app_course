@@ -14,6 +14,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'
 import { AuthState } from './store/auth.state';
 import { CookieService } from 'ngx-cookie-service';
 import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsResetPluginModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

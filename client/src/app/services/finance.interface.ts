@@ -4,5 +4,4 @@ export interface FinanceInterface {
     "value": string,
     "text": string,
     "date_create": string,
-    "date_update": string
 }

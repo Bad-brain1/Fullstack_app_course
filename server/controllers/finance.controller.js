@@ -4,7 +4,7 @@ class FinanceController{
     async getUserFinance(req, res){
         try{
             const finance = await FinanceService.getUserFinance(req.params.id);
-            return res.status(200).json(finance[0]);
+            return res.status(200).json(finance);
         }catch(e){
             res.status(500).json(e)
         }

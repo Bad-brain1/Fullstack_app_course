@@ -12,8 +12,8 @@ router.post('/auth/logout', AuthController.logout)
 router.get('/users', UserController.getAllUser);
 
 router.get('/finance/:id', FinanceController.getUserFinance);
-router.post('/finance/:id', FinanceController.createFinance);
-router.put('/finance/:id', FinanceController.updateFinance);
+router.post('/finance', FinanceController.createFinance);
+router.put('/finance', FinanceController.updateFinance);
 router.delete('/finance/:id', FinanceController.deleteFinance);
 
 export default router;

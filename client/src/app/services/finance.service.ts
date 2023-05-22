@@ -15,4 +15,17 @@ export class FinanceService {
     return this.http.get<FinanceInterface>(`${Config.url}${Config.api}/finance/${id}`)
   }
 
+
+  addFinance(body:object){
+    return this.http.post(`${Config.url}${Config.api}/finance/`,body)
+  }
+
+  deleteFinance(id:number){
+    return this.http.delete(`${Config.url}${Config.api}/finance/${id}`)
+  }
+
+  updateFinance(body:object){
+    return this.http.put(`${Config.url}${Config.api}/finance`,body)
+  }
+
 }

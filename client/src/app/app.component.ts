@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(evt => {
       if (evt instanceof NavigationEnd) {
-        if(this.cookieService.get('T').length > 0){
+        console.log(this.cookieService.check('T'))
+        if(this.cookieService.check('T')){
           if (!this.store.selectSnapshot(AuthState.getIsAuth)) {
             this.updateStore();
           }
@@ -26,10 +27,6 @@ export class AppComponent implements OnInit {
       }
       return true
     });
-
-    if (!this.store.selectSnapshot(AuthState.getIsAuth)) {
-      this.updateStore();
-    }
   }
 
   updateStore() {
