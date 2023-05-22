@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 18 2023 г., 18:39
+-- Время создания: Май 22 2023 г., 20:13
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -32,19 +32,17 @@ CREATE TABLE `finance` (
   `id_user` int NOT NULL,
   `value` text COLLATE utf8mb4_general_ci NOT NULL,
   `text` text COLLATE utf8mb4_general_ci NOT NULL,
-  `date_create` date NOT NULL,
-  `date_update` date NOT NULL
+  `date_create` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `finance`
 --
 
-INSERT INTO `finance` (`id`, `id_user`, `value`, `text`, `date_create`, `date_update`) VALUES
-(1, 1, '1000', 'Лента', '2023-05-13', '2023-05-13'),
-(4, 2, '12324', 'Чипсы', '2023-05-14', '2023-05-14'),
-(6, 2, '4440', 'сухаhbr', '2023-05-14', '2023-05-14'),
-(7, 2, '4111', 'Твввв', '2023-05-14', '2023-05-14');
+INSERT INTO `finance` (`id`, `id_user`, `value`, `text`, `date_create`) VALUES
+(1, 1, '1000', 'Лента', '2023-05-13'),
+(8, 2, '1440', 'Мясо', '2023-05-14'),
+(10, 2, '10000', 'test', '2023-05-22');
 
 -- --------------------------------------------------------
 
@@ -67,9 +65,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `name_first`, `name_last`, `token`) VALUES
 (1, 'test@test.com', '1234', 'Name', 'SecondName', ''),
-(2, 't@dd', '$2b$08$KwYrpiiqheck6UX5L3GvWuYPXI9k4ymDJuks6IL4DxgYgsUTJDLd2', 'nf', 'ns', NULL),
+(2, 't@dd', '$2b$08$KwYrpiiqheck6UX5L3GvWuYPXI9k4ymDJuks6IL4DxgYgsUTJDLd2', 'nf', 'ns', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lX2ZpcnN0IjoibmYiLCJlbWFpbCI6InRAZGQiLCJpYXQiOjE2ODQ3NjgzMzAsImV4cCI6MTY4NDc2ODMzMn0.GOcyunrJJmL0xdtBjX1putkaaDdtfUg_HoX1bzTv4Ek'),
 (3, 't@dds', '$2b$08$b4dxwT1P1xRzpWe01j32PeCRuMeHUiHZvkBMN3vyPmsXHZPYTgTyu', 'nf', 'ns', ''),
-(4, 'tewqe@d', '$2b$08$zynRWsi8LuHhZVelglBMle7E2FCr29RLe0YbAl.797YUaB7wZ4aj.', 'nf', 'ns', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lX2ZpcnN0IjoibmYiLCJlbWFpbCI6InRAZGQiLCJpYXQiOjE2ODQwNjE5MjEsImV4cCI6MTY4NDA2MTkyM30.UJ3aWApxr8oaYSkpZ5z1K7Yj4_hD9HfR_FFEKVvg8Cg');
+(4, 'tewqe@d', '$2b$08$zynRWsi8LuHhZVelglBMle7E2FCr29RLe0YbAl.797YUaB7wZ4aj.', 'nf', 'ns', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lX2ZpcnN0IjoibmYiLCJlbWFpbCI6InRAZGQiLCJpYXQiOjE2ODQwNjE5MjEsImV4cCI6MTY4NDA2MTkyM30.UJ3aWApxr8oaYSkpZ5z1K7Yj4_hD9HfR_FFEKVvg8Cg'),
+(5, 'job.test.html@mail.ru', '$2b$08$eGz7iNYBvS.anIJG7GbqeuV.fhiRfnMSxs34Z/sVJstd8OiJ4BX8.', 'Имя', 'Фамилия', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lX2ZpcnN0Ijoi0JjQvNGPIiwiZW1haWwiOiJqb2IudGVzdC5odG1sQG1haWwucnUiLCJpYXQiOjE2ODQ0MzIwNDAsImV4cCI6MTY4NDQzMjA0Mn0.u1zXGy5OD3H1UYkK7120yneSlPsCzUURH5NPEcCdBPs');
 
 --
 -- Индексы сохранённых таблиц
@@ -97,13 +96,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `finance`
 --
 ALTER TABLE `finance`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
