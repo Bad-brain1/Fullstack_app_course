@@ -11,8 +11,12 @@ export class FinanceService {
   constructor(private http:HttpClient) { }
 
 
-  getUserFinance(id:number|null){
-    return this.http.get<FinanceInterface>(`${Config.url}${Config.api}/finance/${id}`)
+  getUserFinance(id:number|null, year:number){
+    return this.http.get<FinanceInterface>(`${Config.url}${Config.api}/finance/${id}/year/${year}`)
+  }
+  
+  getUserFinanceToMonth(id:number|null, month:number){
+    return this.http.get<FinanceInterface>(`${Config.url}${Config.api}/finance/${id}/month/${month}`)
   }
 
 

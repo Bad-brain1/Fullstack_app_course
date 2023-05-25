@@ -3,12 +3,22 @@ import FinanceService from "../services/finance.service.js";
 class FinanceController{
     async getUserFinance(req, res){
         try{
-            const finance = await FinanceService.getUserFinance(req.params.id);
+            const finance = await FinanceService.getUserFinance(req.params.id, req.params.year);
             return res.status(200).json(finance);
         }catch(e){
             res.status(500).json(e)
         }
     }
+
+    async getUserFinanceToMonth(req,res){
+        try{
+            const finance = await FinanceService.getUserFinanceToMonth(req.params.id,req.params.month);
+            return res.status(200).json(finance);
+        }catch(e){
+            res.status(500).json(e)
+        }
+    }
+
 
     async createFinance(req, res){
         try{

@@ -28,6 +28,10 @@ export class DashboardComponent implements OnInit {
     return this.store.selectSnapshot(AuthState.getAuthObject)
   }
 
+  get Year(){
+    return new Date().getFullYear();
+  }
+
   get month(){
     return this.monthNames[new Date().getMonth()] 
   }
@@ -38,26 +42,56 @@ export class DashboardComponent implements OnInit {
     return sum;
   }
 
-  financeUser:FinanceInterface[] = []
-  idUser:number
+  toggleSelect:boolean = false;
+  currentMonth:string;
+  financeUser:FinanceInterface[] = [];
+  idUser:number;
+  year:number[] = [2020,2022];
+  currentYear:number;
   ngOnInit(): void {
+    this.currentMonth = this.month
+    this.currentYear = new Date().getFullYear();
+    if(!this.year.includes(new Date().getFullYear())){
+      this.year.push(new Date().getFullYear())
+    }
     if(this.isAuth){
       if(this.userId != null){
         this.idUser = this.userId
-        this.getAllFinance();
+        this.getFinanceToMonth(new Date().getMonth()+1);
       }
     }
   }
 
-  getAllFinance(){
+  getFinanceToMonth(month:number){
     if(this.userId != null){
-      this.financeService.getUserFinance(this.userId).subscribe({
+      this.financeService.getUserFinanceToMonth(this.userId,month).subscribe({
+        next:(data:any)=>{
+          this.financeUser = data
+        }
+      })
+    }
+  }
+
+  getAllFinance(year:number){
+    if(this.userId != null){
+
+      this.financeService.getUserFinance(this.userId,year).subscribe({
         next:(data:any)=>{
           this.financeUser = data
         }
       })
     }
 
+  }
+
+  switchMonth(value:string){
+    this.currentMonth = this.monthNames[+value-1] 
+    return this.getFinanceToMonth(+value);
+  }
+
+  switchYear(value:any){
+    this.currentYear = value;
+    return this.getAllFinance(value);
   }
 
   addBody = {
@@ -75,7 +109,7 @@ export class DashboardComponent implements OnInit {
     if(Number(this.addBody.value)){
       return this.financeService.addFinance(this.addBody).subscribe({
         next:()=>{
-          this.getAllFinance();
+          this.getFinanceToMonth(new Date().getMonth()+1);
           this.addBody.text = '';
           this.addBody.value = '';
           this.message = '';
@@ -88,7 +122,7 @@ export class DashboardComponent implements OnInit {
   
   deleteFin(id:number){
     return this.financeService.deleteFinance(id).subscribe({
-      next:()=>{this.getAllFinance();}
+      next:()=>{this.getFinanceToMonth(new Date().getMonth()+1);}
     })
   }
 
@@ -115,12 +149,11 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
-
-    
   }
+
   saveEdit(){
     this.financeService.updateFinance(this.editBody).subscribe({
-      next:()=>{this.getAllFinance()}
+      next:()=>{this.getAllFinance(new Date().getMonth()+1)}
     })
     console.log(this.editBody)
   }

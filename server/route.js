@@ -11,7 +11,8 @@ router.post('/auth/logout', AuthController.logout)
 
 router.get('/users', UserController.getAllUser);
 
-router.get('/finance/:id', FinanceController.getUserFinance);
+router.get('/finance/:id/year/:year', FinanceController.getUserFinance);
+router.get('/finance/:id/month/:month', FinanceController.getUserFinanceToMonth);
 router.post('/finance', FinanceController.createFinance);
 router.put('/finance', FinanceController.updateFinance);
 router.delete('/finance/:id', FinanceController.deleteFinance);

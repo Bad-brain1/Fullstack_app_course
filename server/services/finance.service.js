@@ -1,14 +1,25 @@
 import pool from "./connect.js";
 
 class FinanceService{
-    async getUserFinance(id){
+    async getUserFinance(id,year){
         if(!id){
             throw new Error('не указан ID');
         }
-        const [finance] = await pool.query(`SELECT * FROM finance WHERE id_user = ${id}`);
+        const [finance] = await pool.query(`SELECT * FROM finance WHERE id_user = ${id} and YEAR(date_create) = ${year}`);
+        return finance;
+    }
+
+    async getUserFinanceToMonth(id,month){
+        if(!id){
+            throw new Error('не указан ID');
+        }
+        let year = new Date().getFullYear();
+        const [finance] = await pool.query(`SELECT * FROM finance WHERE id_user = ${id} and MONTH(date_create) = ${month} and YEAR(date_create) = ${year}`);
         return finance;
     }
     
+
+
     async create(body){
         if(!body){
             throw new Error('не указан Body');
