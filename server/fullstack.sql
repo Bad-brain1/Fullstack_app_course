@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 25 2023 г., 21:00
+-- Время создания: Май 26 2023 г., 18:51
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -46,6 +46,32 @@ INSERT INTO `finance` (`id`, `id_user`, `value`, `text`, `date_create`) VALUES
 (13, 2, '100', 'Чипсы лейс', '2022-05-02'),
 (14, 2, '250', 'пельмени', '2023-04-02');
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id` int NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `name_first` varchar(64) NOT NULL,
+  `name_last` varchar(64) NOT NULL,
+  `token` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `name_first`, `name_last`, `token`) VALUES
+(1, 'test@test.com', '1234', 'Name', 'SecondName', ''),
+(2, 't@dd', '$2b$08$KwYrpiiqheck6UX5L3GvWuYPXI9k4ymDJuks6IL4DxgYgsUTJDLd2', 'nf', 'ns', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lX2ZpcnN0IjoibmYiLCJlbWFpbCI6InRAZGQiLCJpYXQiOjE2ODUwMzE4MjYsImV4cCI6MTY4NTAzMTgyOH0.cQZbRog7rVcvRXQmLUvsAclqXMUl5vQWrZAvkbEmU08'),
+(3, 't@dds', '$2b$08$b4dxwT1P1xRzpWe01j32PeCRuMeHUiHZvkBMN3vyPmsXHZPYTgTyu', 'nf', 'ns', ''),
+(4, 'tewqe@d', '$2b$08$zynRWsi8LuHhZVelglBMle7E2FCr29RLe0YbAl.797YUaB7wZ4aj.', 'nf', 'ns', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lX2ZpcnN0IjoibmYiLCJlbWFpbCI6InRAZGQiLCJpYXQiOjE2ODQwNjE5MjEsImV4cCI6MTY4NDA2MTkyM30.UJ3aWApxr8oaYSkpZ5z1K7Yj4_hD9HfR_FFEKVvg8Cg'),
+(5, 'job.test.html@mail.ru', '$2b$08$eGz7iNYBvS.anIJG7GbqeuV.fhiRfnMSxs34Z/sVJstd8OiJ4BX8.', 'Имя', 'Фамилия', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lX2ZpcnN0Ijoi0JjQvNGPIiwiZW1haWwiOiJqb2IudGVzdC5odG1sQG1haWwucnUiLCJpYXQiOjE2ODQ0MzIwNDAsImV4cCI6MTY4NDQzMjA0Mn0.u1zXGy5OD3H1UYkK7120yneSlPsCzUURH5NPEcCdBPs');
+
 --
 -- Индексы сохранённых таблиц
 --
@@ -59,6 +85,12 @@ ALTER TABLE `finance`
   ADD KEY `id_2` (`id`);
 
 --
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -67,6 +99,12 @@ ALTER TABLE `finance`
 --
 ALTER TABLE `finance`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
